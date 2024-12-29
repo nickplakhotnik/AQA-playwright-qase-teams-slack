@@ -42,7 +42,7 @@ export default defineConfig({
         ['list'],
       ],
   use: {
-    baseURL: '',
+    baseURL: 'http://cloudtwo.cloud-vms.com',
     trace: 'on-first-retry',
     screenshot: `only-on-failure`,
     video: `retain-on-failure`,

@@ -1,5 +1,5 @@
 import {BrowserContext, Page} from "@playwright/test";
-import playwrightConfig from "../playwright.config";
+import playwrightConfig from "../../playwright.config";
 
 export class BasePage {
     readonly page: Page;

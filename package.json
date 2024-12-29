@@ -1,0 +1,27 @@
+{
+  "name": "cpanel-store",
+  "version": "1.0.0",
+  "description": "Test Assessment for cPanel Store",
+  "main": "index.js",
+  "scripts": {
+    "test:full": "npx playwright test tests --project=Chromium --headed",
+    "test:ui": "npx playwright test --grep @ui tests --project=Chromium --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.14.2",
+    "eslint": "^9.5.0",
+    "eslint-plugin-playwright": "^1.6.2",
+    "playwright-qase-reporter": "^2.0.15",
+    "prettier": "^3.3.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "playwright": "^1.49.1",
+    "playwright-msteams-reporter": "^0.0.12",
+    "puppeteer": "^22.12.0"
+  }
+}

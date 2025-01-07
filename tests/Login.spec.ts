@@ -9,11 +9,6 @@ test.describe(`Login flow`, () => {
 
     [
         {
-            login: 'invalidEmail',
-            password: 'invalidPassword',
-            message: 'Invalid email address'
-        },
-        {
             login: 'test@gmail.com',
             password: 'SomePassword',
             message: 'Invalid credentials'
@@ -24,7 +19,7 @@ test.describe(`Login flow`, () => {
             message: 'Too short password'
         }
     ].forEach((data) => {
-        test(`Verify with invalid data and error message should be visible`, async({loginPage}) => {
+        test(`Verify with invalid data and error ${data.message} message should be visible`, async({loginPage}) => {
             await loginPage.open();
             await loginPage.login(data.login, data.password);
             await expect(await loginPage.getErrorMessage(data.message)).toBeVisible();

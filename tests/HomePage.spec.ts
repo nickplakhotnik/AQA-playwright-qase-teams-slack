@@ -5,6 +5,8 @@ test.describe(`Home page`, () => {
     test(`Verify sidebar with elements are visible`, async ({loginPage, homePage}) => {
         await loginPage.open();
         await loginPage.login(process.env.EMAIL, process.env.PASSWORD);
+        await homePage.sideBar.clickOnSettings();
+        await homePage.sideBar.clickOnSettingsAlert();
         await expect(await homePage.sideBar.getDashboard()).toBeVisible();
         await expect(await homePage.sideBar.getMonitoring()).toBeVisible();
         await expect(await homePage.sideBar.getAlerts()).toBeVisible();

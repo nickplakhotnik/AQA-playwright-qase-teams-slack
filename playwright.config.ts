@@ -59,6 +59,6 @@ export default defineConfig({
       dependencies: ['setup'],
     },
   ],
-  globalSetup: './global-setup.ts',
-  globalTeardown: './global-teardown.ts',
+  globalSetup: './utils/global-setup.ts',
+  globalTeardown: './utils/global-teardown.ts',
 });

@@ -38,6 +38,6 @@ export class LoginPage extends BasePage {
     }
 
     async getErrorMessage(text: string) {
-        return this.page.locator(`.text-red-600:has-text("${text}")`);
+        return this.page.locator(`[class*="text-red"]:has-text("${text}")`);
     }
 }

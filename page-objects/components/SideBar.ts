@@ -2,20 +2,20 @@ import {Page} from "@playwright/test";
 import {BaseComponent} from "./BaseComponent";
 
 export class SideBar extends BaseComponent {
-    private readonly dashboard = this.page.locator('[href="#"]:has(span:text("Dashboard"))');
-    private readonly monitoring = this.page.locator('[href*="/monitoring"]');
-    private readonly alerts = this.page.locator('[href*="/alerts"]');
-    private readonly search = this.page.locator('[href*="/search"]');
-    private readonly archive = this.page.locator('[href*="/archive"]');
-    private readonly settings = this.page.locator('span:text("Settings")');
-    private readonly settingsCameras = this.page.locator('[href*="/settings/cameras"]');
-    private readonly settingsGateways = this.page.locator('[href="#"]:has(span:text("Gateways"))');
-    private readonly settingsAlerts = this.page.locator('span:text("Alerts")');
-    private readonly settingsAlertsRules = this.page.locator('[href*="/settings/alert-rules"]');
-    private readonly settingsAlertsFaces = this.page.locator('[href*="/settings/face"]');
-    private readonly settingsUsers = this.page.locator('[href*="/settings/users"]');
-    private readonly settingsSites = this.page.locator('[href*="/settings/sites"]');
-    private readonly settingsIntegrations = this.page.locator('[href="#"]:has(span:text("Integrations"))');
+    private readonly dashboard = this.page.locator('//*[text()="Dashboard"]');
+    private readonly monitoring = this.page.locator('//*[text()="Monitoring"]');
+    private readonly alerts = this.page.locator('//*[text()="Alerts"]');
+    private readonly search = this.page.locator('//*[text()="Search"]');
+    private readonly archive = this.page.locator('//*[text()="Archive"]');
+    private readonly settings = this.page.locator('//*[text()="Settings"]');
+    private readonly settingsCameras = this.page.locator('//*[text()="Cameras"]');
+    private readonly settingsGateways = this.page.locator('//*[text()="Gateways"]');
+    private readonly settingsAlerts = this.page.locator('//*[contains(@class, "MuiCollapse-entered")]//*[text()="Alerts"]');
+    private readonly settingsAlertsRules = this.page.locator('//*[text()="Rules"]');
+    private readonly settingsAlertsFaces = this.page.locator('//*[text()="Faces"]');
+    private readonly settingsUsers = this.page.locator('//*[text()="Users"]');
+    private readonly settingsSites = this.page.locator('//*[text()="Sites"]');
+    private readonly settingsIntegrations = this.page.locator('//*[text()="Integrations"]');
 
     constructor(page: Page) {
         super(page);
@@ -30,7 +30,7 @@ export class SideBar extends BaseComponent {
     }
 
     async getAlerts() {
-        return this.alerts;
+        return this.alerts.first();
     }
 
     async getSearch() {
@@ -70,10 +70,20 @@ export class SideBar extends BaseComponent {
     }
 
     async getSites() {
-        return this.settingsSites;
+        return this.settingsSites.first();
     }
 
     async getIntegrations() {
         return this.settingsIntegrations;
+    }
+
+    async clickOnSettings() {
+        await this.settings.hover();
+        await this.settings.click();
+    }
+
+    async clickOnSettingsAlert() {
+        await this.settingsAlerts.hover();
+        await this.settingsAlerts.click();
     }
 }

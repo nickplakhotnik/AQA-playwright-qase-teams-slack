@@ -71,10 +71,6 @@ jobs:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          POWER_WEBHOOK: ${{ secrets.POWER_WEBHOOK }}
-          QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
-          QASE_PROJECT_CODE: ${{ secrets.QASE_PROJECT_CODE }}
-          QASE_TESTOPS_RUN_ID: ${{ needs.create_qase_test_run.outputs.qase_run_id }}
         run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Upload blob report to GitHub Actions Artifacts
@@ -105,13 +101,6 @@ jobs:
           path: all-blob-reports
           pattern: blob-report-*
           merge-multiple: true
-
-      - name: Merge into HTML Report and send MS Teams notification
-        env:
-          QASE_PROJECT_CODE: ${{ secrets.QASE_PROJECT_CODE }}
-          QASE_TESTOPS_RUN_ID: ${{ needs.create_qase_test_run.outputs.qase_run_id }}
-          POWER_WEBHOOK: ${{ secrets.POWER_WEBHOOK }}
-        run: npx playwright merge-reports --config=merge.config.ts ./all-blob-reports
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4

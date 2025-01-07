@@ -6,32 +6,9 @@ on:
     branches: [main]
 
 jobs:
-  create_qase_test_run:
-    name: Create Qase Test Run
-    runs-on: ubuntu-latest
-    outputs:
-      qase_run_id: ${{ steps.qase-run-create.outputs.id }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Get current date
-        id: get-date
-        run: echo "date=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
-
-      - name: Create a Qase test run
-        id: qase-run-create
-        uses: qase-tms/gh-actions/run-create@v1
-        with:
-          token: ${{ secrets.QASE_API_TOKEN }}
-          project: ${{ secrets.QASE_PROJECT_CODE }}
-          title: "Playwright Test Run ${{ steps.get-date.outputs.date }}"
-          description: "Automated Playwright test run"
-          verbose: true
 
   playwright-tests:
     name: Run Playwright Tests
-    needs: [create_qase_test_run]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
@@ -84,7 +61,7 @@ jobs:
   merge-reports:
     name: Merge Reports
     if: ${{ !cancelled() }}
-    needs: [create_qase_test_run, playwright-tests]
+    needs: [playwright-tests]
 
     runs-on: ubuntu-latest
     steps:
